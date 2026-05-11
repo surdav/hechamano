@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="es" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
 <head>
+    <meta charset="utf-8">
     <!-- METADATOS BÁSICOS SEO -->
     <title>Reformas integrales en Lloret de Mar | Grupo Hecho a Mano</title>
     <meta name="description"
@@ -11,7 +12,6 @@
     <meta name="author" content="Reformas Hecho a Mano, S.L.U.">
     <meta name="robots" content="index, follow">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="utf-8">
     <meta name="theme-color" content="#2E2E2E">
 
     <!-- OPEN GRAPH (Facebook, LinkedIn) -->
@@ -63,6 +63,13 @@
           as="image"
           href="/empresa_de_reformas_integrales_en_lloret_de_mar/img/header_1200x416.webp"
           type="image/webp"
+          media="(min-width: 768px)"
+          fetchpriority="high">
+    <link rel="preload"
+          as="image"
+          href="/empresa_de_reformas_integrales_en_lloret_de_mar/img/header_800x277.jpg"
+          type="image/jpeg"
+          media="(max-width: 767px)"
           fetchpriority="high">
 
     <!-- SCHEMA.ORG JSON-LD (EMPRESA LOCAL) -->
@@ -286,8 +293,15 @@
         }
     </script>
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/empresa_de_reformas_integrales_en_lloret_de_mar/assets/tailwind.css">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preload"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          as="style"
+          onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </noscript>
     <link rel="icon" type="image/png" sizes="32x32"
           href="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f3e0.png">
     <link rel="icon" type="image/png" sizes="16x16"
@@ -303,6 +317,17 @@
             background-position: center center;
             min-height: 80vh;
             padding: clamp(2rem, 6vh, 4rem) 0;
+        }
+
+        @media (max-width: 767px) {
+            .hero {
+                background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/empresa_de_reformas_integrales_en_lloret_de_mar/img/header_800x277.jpg');
+            }
+        }
+
+        body > section:not(#inicio) {
+            content-visibility: auto;
+            contain-intrinsic-size: auto 900px;
         }
 
         /* Estilos para videos de YouTube */
@@ -836,23 +861,48 @@
             });
 
             // Integración de vídeos de YouTube
-            let youtube = document.querySelectorAll(".youtube");
-            for (let i = 0; i < youtube.length; i++) {
-                let source = "https://img.youtube.com/vi/" + youtube[i].dataset.embed + "/sddefault.jpg";
-                let image = new Image();
-                image.src = source;
-                image.addEventListener("load", function () {
-                    youtube[i].appendChild(image);
-                });
+            const youtubeVideos = document.querySelectorAll(".youtube");
 
-                youtube[i].addEventListener("click", function () {
-                    let iframe = document.createElement("iframe");
-                    iframe.setAttribute("frameborder", "0");
-                    iframe.setAttribute("allowfullscreen", "");
-                    iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture");
-                    iframe.setAttribute("src", "https://www.youtube.com/embed/" + this.dataset.embed + "?rel=0&showinfo=0&autoplay=1");
-                    this.innerHTML = "";
-                    this.appendChild(iframe);
+            function loadYoutubeThumbnail(video) {
+                if (video.dataset.thumbnailLoaded === "true") return;
+
+                const image = new Image();
+                image.decoding = "async";
+                image.alt = "Vista previa del vídeo de reformas";
+                image.src = "https://img.youtube.com/vi/" + video.dataset.embed + "/sddefault.jpg";
+                video.appendChild(image);
+                video.dataset.thumbnailLoaded = "true";
+            }
+
+            function activateYoutubeVideo() {
+                const iframe = document.createElement("iframe");
+                iframe.setAttribute("frameborder", "0");
+                iframe.setAttribute("allowfullscreen", "");
+                iframe.setAttribute("loading", "lazy");
+                iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture");
+                iframe.setAttribute("src", "https://www.youtube.com/embed/" + this.dataset.embed + "?rel=0&showinfo=0&autoplay=1");
+                this.innerHTML = "";
+                this.appendChild(iframe);
+            }
+
+            if ("IntersectionObserver" in window) {
+                const youtubeObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            loadYoutubeThumbnail(entry.target);
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, {rootMargin: "300px 0px"});
+
+                youtubeVideos.forEach(video => {
+                    youtubeObserver.observe(video);
+                    video.addEventListener("click", activateYoutubeVideo);
+                });
+            } else {
+                youtubeVideos.forEach(video => {
+                    loadYoutubeThumbnail(video);
+                    video.addEventListener("click", activateYoutubeVideo);
                 });
             }
         });
@@ -876,7 +926,10 @@
                     src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/logo.webp"
                     alt="Grupo HECHO A MANO"
                     class="h-10 w-auto"
-                >
+                    width="900"
+                    height="126"
+                    loading="eager"
+                    decoding="async">
             </a>
         </div>
 
@@ -1032,7 +1085,7 @@
                 </div>
             </div>
             <div class="md:w-1/2">
-                <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/reforma-de-cocina-encimera.webp" alt="Reforma cocina encimera porcelánica negra" class="rounded-lg shadow-lg w-full">
+                <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/reforma-de-cocina-encimera.webp" alt="Reforma cocina encimera porcelánica negra" class="rounded-lg shadow-lg w-full" loading="lazy" decoding="async">
             </div>
         </div>
     </div>
@@ -1322,7 +1375,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <!-- Servicio 1 - Reformas integrales -->
             <div class="service-card bg-gray-50 rounded-lg overflow-hidden shadow-md">
-                <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/reformas-de-casas.webp" alt="Reformas integrales" class="w-full h-48 object-cover">
+                <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/reformas-de-casas.webp" alt="Reformas integrales" class="w-full h-48 object-cover" loading="lazy" decoding="async">
                 <div class="p-6">
                     <h3 class="text-xl font-bold mb-3">Reformas integrales en Lloret de Mar</h3>
 <p class="text-gray-600 mb-4">Realizamos reformas completas en viviendas y espacios comerciales, ocupándonos de la planificación, la organización de los gremios y la ejecución de cada fase para conseguir un resultado sólido, funcional y con acabados de calidad.</p>
@@ -1332,7 +1385,7 @@
 
             <!-- Servicio 2 - Reformas de cocinas -->
             <div class="service-card bg-gray-50 rounded-lg overflow-hidden shadow-md">
-                <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/reformas-cocinas.webp" alt="Reformas de cocinas" class="w-full h-48 object-cover">
+                <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/reformas-cocinas.webp" alt="Reformas de cocinas" class="w-full h-48 object-cover" loading="lazy" decoding="async">
                 <div class="p-6">
                     <h3 class="text-xl font-bold mb-3">Reformas de cocinas en Lloret de Mar</h3>
 <p class="text-gray-600 mb-4">Renovamos cocinas para convertirlas en espacios más cómodos, prácticos y actuales, combinando diseño, resistencia y soluciones pensadas para el uso diario.</p>
@@ -1342,7 +1395,7 @@
 
             <!-- Servicio 3 - Renovación de baños -->
             <div class="service-card bg-gray-50 rounded-lg overflow-hidden shadow-md">
-                <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/reforma-de-bano.jpg" alt="Reformas de baños" class="w-full h-48 object-cover">
+                <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/reforma-de-bano.jpg" alt="Reformas de baños" class="w-full h-48 object-cover" loading="lazy" decoding="async">
                 <div class="p-6">
                     <h3 class="text-xl font-bold mb-3">Reformas de baños en Lloret de Mar</h3>
 <p class="text-gray-600 mb-4">Actualizamos baños para crear espacios más confortables, modernos y bien aprovechados, empleando materiales resistentes y cuidando cada remate para conseguir un acabado duradero y funcional.</p>
@@ -1353,7 +1406,7 @@
             <!-- Servicio 4 - Reformas de locales comerciales -->
             <div class="service-card bg-gray-50 rounded-lg overflow-hidden shadow-md">
                 <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/reformas-integrales-locales.webp" alt="Reformas de locales"
-                     class="w-full h-48 object-cover">
+                     class="w-full h-48 object-cover" loading="lazy" decoding="async">
                 <div class="p-6">
                     <h3 class="text-xl font-bold mb-3">Reformas de locales comerciales en Lloret de Mar</h3>
 <p class="text-gray-600 mb-4">Acondicionamos y renovamos locales comerciales para que transmitan la imagen de tu marca, mejoren la experiencia del cliente y se adapten al funcionamiento diario de tu negocio.</p>
@@ -1363,7 +1416,7 @@
 
             <!-- Servicio 5 - Carpintería de aluminio -->
             <div class="service-card bg-gray-50 rounded-lg overflow-hidden shadow-md">
-                <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/carpinteria-aluminio.jpg" alt="Carpintería de aluminio" class="w-full h-48 object-cover">
+                <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/carpinteria-aluminio.jpg" alt="Carpintería de aluminio" class="w-full h-48 object-cover" loading="lazy" decoding="async">
                 <div class="p-6">
                     <h3 class="text-xl font-bold mb-3">Instalación de carpintería de aluminio en Lloret de Mar</h3>
 <p class="text-gray-600 mb-4">Diseñamos, fabricamos e instalamos cerramientos, puertas y ventanas de aluminio a medida, con soluciones pensadas para mejorar el aislamiento, la seguridad y el confort de la vivienda.</p>
@@ -1373,7 +1426,7 @@
 
             <!-- Servicio 6 - Carpintería en madera -->
             <div class="service-card bg-gray-50 rounded-lg overflow-hidden shadow-md">
-                <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/carpinteria-de-madera.jpg" alt="Carpintería de madera" class="w-full h-48 object-cover">
+                <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/carpinteria-de-madera.jpg" alt="Carpintería de madera" class="w-full h-48 object-cover" loading="lazy" decoding="async">
                 <div class="p-6">
                     <h3 class="text-xl font-bold mb-3">Trabajos de carpintería en madera en Lloret de Mar</h3>
 <p class="text-gray-600 mb-4">Creamos soluciones de madera a medida para viviendas y negocios, desde armarios y puertas hasta mobiliario personalizado, cuidando la elección de materiales y cada detalle del acabado.</p>
@@ -1384,7 +1437,7 @@
             <!-- Servicio 7 - Trabajos eléctricos -->
             <div class="service-card bg-gray-50 rounded-lg overflow-hidden shadow-md">
                 <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/cambiar-instalacion-electrica.jpg" alt="Instalaciones eléctricas"
-                     class="w-full h-48 object-cover">
+                     class="w-full h-48 object-cover" loading="lazy" decoding="async">
                 <div class="p-6">
                     <h3 class="text-xl font-bold mb-3">Trabajos e instalaciones eléctricas en Lloret de Mar</h3>
 <p class="text-gray-600 mb-4">Realizamos actuaciones eléctricas completas, desde la renovación de instalaciones antiguas hasta la integración de sistemas de iluminación, automatización y domótica, incluyendo cuadros eléctricos y certificados oficiales.</p>
@@ -1395,7 +1448,7 @@
             <!-- Servicio 8 - Fontanería y desatascos -->
             <div class="service-card bg-gray-50 rounded-lg overflow-hidden shadow-md">
                 <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/fontaneria-y-desatascos.jpg" alt="Fontanería y desatascos"
-                     class="w-full h-48 object-cover">
+                     class="w-full h-48 object-cover" loading="lazy" decoding="async">
                 <div class="p-6">
                     <h3 class="text-xl font-bold mb-3">Fontanería urgente y desatascos en Lloret de Mar</h3>
 <p class="text-gray-600 mb-4">Atendemos incidencias de fontanería con rapidez, desde fugas y averías hasta instalaciones de baños, cocinas y sanitarios, además de servicios de desatasco para resolver problemas urgentes.</p>
@@ -1406,7 +1459,7 @@
             <!-- Servicio 9 - Cerrajería especializada -->
             <div class="service-card bg-gray-50 rounded-lg overflow-hidden shadow-md">
                 <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/empresa-cerrajeros-cerrajeria.webp" alt="Cerrajería profesional"
-                     class="w-full h-48 object-cover">
+                     class="w-full h-48 object-cover" loading="lazy" decoding="async">
                 <div class="p-6">
                     <h3 class="text-xl font-bold mb-3">Servicio de cerrajería urgente en Lloret de Mar</h3>
 <p class="text-gray-600 mb-4">Ofrecemos soluciones de cerrajería con intervención rápida, desde apertura de puertas y sustitución de cerraduras hasta instalación de sistemas de seguridad y copias de llaves.</p>
@@ -1417,7 +1470,7 @@
             <!-- Servicio 10 - Sistemas de automatización del hogar -->
             <div class="service-card bg-gray-50 rounded-lg overflow-hidden shadow-md">
                 <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/empresa-de-instalacion-domotica.webp" alt="Instalación de domótica"
-                     class="w-full h-48 object-cover">
+                     class="w-full h-48 object-cover" loading="lazy" decoding="async">
                 <div class="p-6">
                     <h3 class="text-xl font-bold mb-3">Instalación de domótica en viviendas de Lloret de Mar</h3>
 <p class="text-gray-600 mb-4">Integramos soluciones inteligentes para que puedas controlar iluminación, climatización y seguridad desde el móvil, mejorando la comodidad del hogar y haciendo un uso más eficiente de la energía.</p>
@@ -1428,7 +1481,7 @@
             <!-- Servicio 11 - Montaje de estructuras de aluminio para cerramientos -->
             <div class="service-card bg-gray-50 rounded-lg overflow-hidden shadow-md">
                 <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/equipamento-de-cerramientos-de-aluminio.webp"
-                     alt="Instalación de cerramientos de aluminio" class="w-full h-48 object-cover">
+                     alt="Instalación de cerramientos de aluminio" class="w-full h-48 object-cover" loading="lazy" decoding="async">
                 <div class="p-6">
                     <h3 class="text-xl font-bold mb-3">Cerramientos de aluminio personalizados</h3>
 <p class="text-gray-600 mb-4">Instalamos cerramientos de aluminio para terrazas, balcones y porches, creando soluciones a medida que aportan protección, mejor aprovechamiento del espacio y un acabado estético cuidado.</p>
@@ -1439,7 +1492,7 @@
             <!-- Servicio 12 - Montaje y reparación de sistemas de calefacción -->
             <div class="service-card bg-gray-50 rounded-lg overflow-hidden shadow-md">
                 <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/calefaccion-y-climatizacion.webp" alt="Instalación y reparación de calefacción"
-                     class="w-full h-48 object-cover">
+                     class="w-full h-48 object-cover" loading="lazy" decoding="async">
                 <div class="p-6">
                     <h3 class="text-xl font-bold mb-3">Instalación y reparación de calefacción en Lloret de Mar</h3>
 <p class="text-gray-600 mb-4">Nos encargamos del montaje, revisión y reparación de calderas, radiadores y sistemas de climatización, garantizando un funcionamiento seguro, eficiente y adaptado a las necesidades de cada vivienda.</p>
@@ -1450,7 +1503,7 @@
             <!-- Service 13 - Montaje de sistemas de suelo radiante -->
             <div class="service-card bg-gray-50 rounded-lg overflow-hidden shadow-md">
                 <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/instalacion-suelo-radiantes.jpg" alt="Instalación de suelo radiantes"
-                     class="w-full h-48 object-cover">
+                     class="w-full h-48 object-cover" loading="lazy" decoding="async">
                 <div class="p-6">
                     <h3 class="text-xl font-bold mb-3">Instalación de suelo radiante en Lloret de Mar</h3>
 <p class="text-gray-600 mb-4">Colocamos sistemas de calefacción por suelo radiante que reparten el calor de forma equilibrada por toda la vivienda, mejorando el confort térmico y ayudando a optimizar el consumo energético.</p>
@@ -1461,7 +1514,7 @@
             <!-- Servicio 14 - Colocación e instalación de parquet y gres -->
             <div class="service-card bg-gray-50 rounded-lg overflow-hidden shadow-md">
                 <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/cambiar-el-suelo-parquet-o-tarima-flotante.webp"
-                     alt="Montaje e instalación de parquet y gres" class="w-full h-48 object-cover">
+                     alt="Montaje e instalación de parquet y gres" class="w-full h-48 object-cover" loading="lazy" decoding="async">
                 <div class="p-6">
                     <h3 class="text-xl font-bold mb-3">Colocación de parquet, tarima y suelos cerámicos</h3>
 <p class="text-gray-600 mb-4">Instalamos suelos de parquet, tarima flotante y pavimentos cerámicos o porcelánicos con un trabajo preciso, pensado para lograr superficies resistentes, estables y con un acabado visual cuidado.</p>
@@ -1471,7 +1524,7 @@
 
             <!-- Servicio 15 - Instalación de pladur -->
             <div class="service-card bg-gray-50 rounded-lg overflow-hidden shadow-md">
-                <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/montaje-de-pladur.jpeg" alt="Montaje de pladur" class="w-full h-48 object-cover">
+                <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/montaje-de-pladur.jpeg" alt="Montaje de pladur" class="w-full h-48 object-cover" loading="lazy" decoding="async">
                 <div class="p-6">
                     <h3 class="text-xl font-bold mb-3">Montaje de pladur personalizado</h3>
 <p class="text-gray-600 mb-4">Ejecutamos soluciones en pladur para construir tabiques, techos suspendidos y revestimientos interiores, con una instalación cuidada y acabados limpios de nivel profesional.</p>
@@ -1481,7 +1534,7 @@
 
             <!-- Servicio 16 - Construcción de viviendas -->
             <div class="service-card bg-gray-50 rounded-lg overflow-hidden shadow-md">
-                <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/construccion-de-casas.avif" alt="Construcción de casas" class="w-full h-48 object-cover">
+                <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/construccion-de-casas.avif" alt="Construcción de casas" class="w-full h-48 object-cover" loading="lazy" decoding="async">
                 <div class="p-6">
                     <h3 class="text-xl font-bold mb-3">Construcción de casas y obra nueva</h3>
 <p class="text-gray-600 mb-4">Llevamos a cabo proyectos de obra nueva para viviendas unifamiliares y adosadas, diseñando espacios a medida que se ajustan a las necesidades, preferencias y forma de vida de cada propietario.</p>
@@ -1491,7 +1544,7 @@
 
             <!-- Servicio 17 - Trabajos de manitas -->
             <div class="service-card bg-gray-50 rounded-lg overflow-hidden shadow-md">
-                <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/manitas.webp" alt="Manitas" class="w-full h-48 object-cover">
+                <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/manitas.webp" alt="Manitas" class="w-full h-48 object-cover" loading="lazy" decoding="async">
                 <div class="p-6">
                     <h3 class="text-xl font-bold mb-3">Servicio de manitas para reparaciones y montajes en casa</h3>
 <p class="text-gray-600 mb-4">Nos encargamos de pequeños arreglos, tareas de mantenimiento y montajes sencillos tanto en viviendas particulares como en locales comerciales.</p>
@@ -1502,7 +1555,7 @@
             <!-- Servicio 18 - Reparaciones del hogar -->
             <div class="service-card bg-gray-50 rounded-lg overflow-hidden shadow-md">
                 <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/reparaciones-del-hogar.webp" alt="Reparaciones del hogar"
-                     class="w-full h-48 object-cover">
+                     class="w-full h-48 object-cover" loading="lazy" decoding="async">
                 <div class="p-6">
                     <h3 class="text-xl font-bold mb-3">Reparaciones generales y mantenimiento de viviendas</h3>
 <p class="text-gray-600 mb-4">Realizamos trabajos de mantenimiento en el hogar, resolviendo incidencias, haciendo ajustes y llevando a cabo pequeñas reparaciones para conservar la vivienda en buen estado.</p>
@@ -1514,7 +1567,7 @@
             <div id="cambiar-banera-por-plato-de-ducha-en-canet-de-mar"
                  class="service-card bg-gray-50 rounded-lg overflow-hidden shadow-md scroll-mt-24">
                 <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/cambiar-banera-por-ducha.webp" alt="Cambiar bañera por ducha en Lloret de Mar"
-                     class="w-full h-48 object-cover">
+                     class="w-full h-48 object-cover" loading="lazy" decoding="async">
                 <div class="p-6">
                     <h3 class="text-xl font-bold mb-3">Sustitución de bañera por plato de ducha en Lloret de Mar</h3>
 <p class="text-gray-600 mb-4">Cambiamos bañeras antiguas por platos de ducha modernos, seguros y accesibles mediante una intervención ágil, ordenada y con garantía. Si quieres actualizar tu baño en Lloret de Mar, ofrecemos un servicio completo que incluye impermeabilización, adaptación de fontanería y todos los acabados necesarios para un resultado profesional.</p>
@@ -1528,7 +1581,7 @@
             <div id="pintado-de-fachadas-en-lloret-de-mar"
                  class="service-card bg-gray-50 rounded-lg overflow-hidden shadow-md scroll-mt-24">
                 <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/pintado-de-fachadas.webp" alt="Pintado de fachadas en Lloret de Mar"
-                     class="w-full h-48 object-cover">
+                     class="w-full h-48 object-cover" loading="lazy" decoding="async">
                 <div class="p-6">
                     <h3 class="text-xl font-bold mb-3">Rehabilitación y pintura de fachadas en Lloret de Mar</h3>
 <p class="text-gray-600 mb-4">Realizamos trabajos de restauración y protección de fachadas frente a la humedad, el paso del tiempo y el desgaste propio de zonas costeras, aplicando revestimientos técnicos impermeables y transpirables para lograr un acabado uniforme y duradero.</p>
@@ -1543,7 +1596,7 @@
                  class="service-card bg-gray-50 rounded-lg overflow-hidden shadow-md scroll-mt-24">
                 <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/colocacion-plato-ducha.webp"
                      alt="Colocación de platos de ducha antideslizantes en Lloret de Mar"
-                     class="w-full h-48 object-cover">
+                     class="w-full h-48 object-cover" loading="lazy" decoding="async">
                 <div class="p-6">
                     <h3 class="text-xl font-bold mb-3">Colocación de platos de ducha antideslizantes en Lloret de Mar</h3>
 <p class="text-gray-600 mb-4">Instalamos platos de ducha extraplanos con superficie antideslizante para hacer el baño más seguro, cómodo y accesible. Nuestro equipo realiza cada trabajo con orden, rapidez y acabados profesionales en viviendas de Lloret de Mar.</p>
@@ -1569,95 +1622,95 @@
 
             <div class="gallery-item">
                 <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/reformas.webp" alt="Reformas en Costa Brava"
-                     class="w-full h-64 object-cover rounded-lg shadow-lg">
+                     class="w-full h-64 object-cover rounded-lg shadow-lg" loading="lazy" decoding="async">
             </div>
 
             <div class="gallery-item">
                 <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/Suelo_Porcelanico_imitacion_Hidraulico_Costa_Brava.webp" alt="Suelo porcelánico imitación hidráulico con Grupo HECHO A MANO"
-                     class="w-full h-64 object-cover rounded-lg shadow-lg">
+                     class="w-full h-64 object-cover rounded-lg shadow-lg" loading="lazy" decoding="async">
             </div>
 
             <div class="gallery-item">
                 <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/Barandas-Hierro-Vidrios-3+3-Mate-Cantos-pulidos.webp" alt="Barandas de Hierro pintado con Oxirón Blanco Vidrios 3+3 Mate con Cantos pulidos"
-                     class="w-full h-64 object-cover rounded-lg shadow-lg">
+                     class="w-full h-64 object-cover rounded-lg shadow-lg" loading="lazy" decoding="async">
             </div>
 
             <div class="gallery-item">
                 <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/reforma-cocina-encimera-porcelanica.webp" alt="Reforma de cocina con encimera porcelánica de diseño"
-                     class="w-full h-64 object-cover rounded-lg shadow-lg">
+                     class="w-full h-64 object-cover rounded-lg shadow-lg" loading="lazy" decoding="async">
             </div>
 
             <div class="gallery-item">
                 <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/armario-de-aluminio-gris-texturado-para-cubrir-compresor-de-aire-acondicionado.webp" alt="Armario de aluminio gris texturado para cubrir compresor de aire acondicionado"
-                     class="w-full h-64 object-cover rounded-lg shadow-lg">
+                     class="w-full h-64 object-cover rounded-lg shadow-lg" loading="lazy" decoding="async">
             </div>
 
             <div class="gallery-item">
                 <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/Instalacion-de-Acometidas-electricas-Instalacion-de-cuadros-electricos-para-particulares-y-comunidades.webp" alt="Instalación de cuadros eléctricos para particulares y comunidades e Instalación de Acometidas eléctricas"
-                     class="w-full h-64 object-cover rounded-lg shadow-lg">
+                     class="w-full h-64 object-cover rounded-lg shadow-lg" loading="lazy" decoding="async">
             </div>
 
             <div class="gallery-item">
                 <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/Cocina_con_Encimera_Porcelanica.jpg" alt="Reforma cocina con encimera porcelánica negra"
-                     class="w-full h-64 object-cover rounded-lg shadow-lg">
+                     class="w-full h-64 object-cover rounded-lg shadow-lg" loading="lazy" decoding="async">
             </div>
 
             <div class="gallery-item">
                 <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/Reforma_Cocina_con_Encimera_Porcelanica.jpg" alt="Reforma integral de cocina moderna con península en Lloret de Mar"
-                     class="w-full h-64 object-cover rounded-lg shadow-lg">
+                     class="w-full h-64 object-cover rounded-lg shadow-lg" loading="lazy" decoding="async">
             </div>
 
             <div class="gallery-item">
                 <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/Cocina_Encimera_Porcelanica.JPG" alt="Diseño moderno de encimera porcelánica de cocina en Costa Brava"
-                     class="w-full h-64 object-cover rounded-lg shadow-lg">
+                     class="w-full h-64 object-cover rounded-lg shadow-lg" loading="lazy" decoding="async">
             </div>
 
             <div class="gallery-item">
                 <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/Reforma_Cocina_Encimera_Porcelanica.JPG" alt="Reforma de cocina de madera y negro en Lloret de Mar"
-                     class="w-full h-64 object-cover rounded-lg shadow-lg">
+                     class="w-full h-64 object-cover rounded-lg shadow-lg" loading="lazy" decoding="async">
             </div>
 
             <div class="gallery-item">
                 <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/Cocina_Encimera_Porcelanica_Costa_Brava.JPG" alt="Cocina abierta con isla y encimera porcelánica"
-                     class="w-full h-64 object-cover rounded-lg shadow-lg">
+                     class="w-full h-64 object-cover rounded-lg shadow-lg" loading="lazy" decoding="async">
             </div>
 
             <div class="gallery-item">
                 <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/cambiar-banera-por-ducha.avif" alt="Cambiar bañera por ducha en Lloret de Mar, la Selva"
-                     class="w-full h-64 object-cover rounded-lg shadow-lg">
+                     class="w-full h-64 object-cover rounded-lg shadow-lg" loading="lazy" decoding="async">
             </div>
 
             <div class="gallery-item">
                 <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/pintado-de-fachadas.avif" alt="Pintado de fachadas en Lloret de Mar, Cataluña"
-                     class="w-full h-64 object-cover rounded-lg shadow-lg">
+                     class="w-full h-64 object-cover rounded-lg shadow-lg" loading="lazy" decoding="async">
             </div>
 
             <div class="gallery-item">
                 <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/colocacion-plato-ducha.avif"
                      alt="Colocación de plato de ducha antideslizante en Lloret de Mar"
-                     class="w-full h-64 object-cover rounded-lg shadow-lg">
+                     class="w-full h-64 object-cover rounded-lg shadow-lg" loading="lazy" decoding="async">
             </div>
 
             <div class="gallery-item">
                 <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/reformas-de-casas.webp" alt="Reforma integral"
-                     class="w-full h-64 object-cover rounded-lg shadow-lg">
+                     class="w-full h-64 object-cover rounded-lg shadow-lg" loading="lazy" decoding="async">
             </div>
 
             <div class="gallery-item">
                 <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/reforma-de-salon-comedor.avif" alt="Baño renovado"
-                     class="w-full h-64 object-cover rounded-lg shadow-lg">
+                     class="w-full h-64 object-cover rounded-lg shadow-lg" loading="lazy" decoding="async">
             </div>
             <div class="gallery-item">
                 <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/reforma-de-cocina.avif" alt="Ventanas nuevas"
-                     class="w-full h-64 object-cover rounded-lg shadow-lg">
+                     class="w-full h-64 object-cover rounded-lg shadow-lg" loading="lazy" decoding="async">
             </div>
             <div class="gallery-item">
                 <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/instalacion-electrica.jpg" alt="Instalación eléctrica"
-                     class="w-full h-64 object-cover rounded-lg shadow-lg">
+                     class="w-full h-64 object-cover rounded-lg shadow-lg" loading="lazy" decoding="async">
             </div>
             <div class="gallery-item">
                 <img src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/instalaciones-fontaneria.jpg" alt="Fontanería"
-                     class="w-full h-64 object-cover rounded-lg shadow-lg">
+                     class="w-full h-64 object-cover rounded-lg shadow-lg" loading="lazy" decoding="async">
             </div>
 
         </div>
