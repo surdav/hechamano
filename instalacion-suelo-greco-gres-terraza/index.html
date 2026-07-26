@@ -143,7 +143,8 @@
     <!-- ========================================================= -->
 
     <!-- Tailwind Play CDN (JIT: garantiza que todas las utilidades usadas en esta página se generen) -->
-    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+
+    <link rel="stylesheet" href="/instalacion-suelo-greco-gres-terraza/tailwind.css">
 
     <link rel="preconnect"
           href="https://cdnjs.cloudflare.com"
@@ -428,6 +429,7 @@
             position:fixed;
             inset:0;
             background:rgba(0,0,0,.92);
+            display:flex;
             justify-content:center;
             align-items:center;
             z-index:99999;
@@ -2739,7 +2741,8 @@ document.addEventListener("DOMContentLoaded",function(){
 
     }
 
-    const images=Array.from(document.querySelectorAll(".gallery-item"));
+
+    const images = Array.from(document.querySelectorAll(".gallery-item img, img.gallery-item"));
     const modal=document.getElementById("imageModal");
     const modalImage=document.getElementById("modalImage");
     const close=document.querySelector(".close");
