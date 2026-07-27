@@ -126,16 +126,25 @@
 
     <link rel="preload"
           as="image"
-          href="/instalacion-suelo-greco-gres-terraza/Instalacion_Suelo_Greco_Gres_terraza.webp"
+          href="/instalacion-suelo-greco-gres-terraza/header_1200x416.webp"
           type="image/webp"
+          media="(min-width: 768px)"
+          fetchpriority="high">
+
+    <link rel="preload"
+          as="image"
+          href="/instalacion-suelo-greco-gres-terraza/header_800x277.jpg"
+          type="image/jpeg"
+          media="(max-width: 767px)"
           fetchpriority="high">
 
     <!-- ========================================================= -->
     <!-- CSS -->
     <!-- ========================================================= -->
 
-    <link rel="stylesheet"
-          href="/empresa_de_reformas_integrales_en_lloret_de_mar/assets/tailwind.css">
+    <!-- Tailwind Play CDN (JIT: garantiza que todas las utilidades usadas en esta página se generen) -->
+
+    <link rel="stylesheet" href="/instalacion-suelo-greco-gres-terraza/tailwind.css">
 
     <link rel="preconnect"
           href="https://cdnjs.cloudflare.com"
@@ -252,21 +261,30 @@
     </script>
 
     <!-- ========================================================= -->
-    <!-- SCHEMA - IMAGE OBJECT -->
-    <!-- ========================================================= -->
-
     <script type="application/ld+json">
-    {
-      "@context":"https://schema.org",
-      "@type":"ImageObject",
-      "contentUrl":"https://hechamano.es/instalacion-suelo-greco-gres-terraza/foto_destacada_Instalacion_de_Suelo_Greco_Gres_para_terraza.webp",
-      "caption":"Instalación de suelo Greco Gres para terraza realizada por Grupo HECHO A MANO en Lloret de Mar",
-      "creditText":"Grupo HECHO A MANO",
-      "creator":{
-        "@type":"Organization",
-        "name":"Grupo HECHO A MANO"
-      }
-    }
+        {
+            "@context":"https://schema.org",
+            "@type":"ImageObject",
+
+            "contentUrl":"https://hechamano.es/instalacion-suelo-greco-gres-terraza/foto_destacada_Instalacion_de_Suelo_Greco_Gres_para_terraza.webp",
+
+            "caption":"Instalación de suelo Greco Gres para terraza realizada por Grupo HECHO A MANO en Lloret de Mar",
+
+            "representativeOfPage": true,
+
+            "creditText":"Grupo HECHO A MANO",
+
+            "copyrightNotice":"© Grupo HECHO A MANO. Todos los derechos reservados.",
+
+            "creator":{
+                "@type":"Organization",
+                "name":"Reformas Hecho a Mano, S.L.U."
+            },
+
+            "license":"https://hechamano.es/licencia-imagenes/",
+
+            "acquireLicensePage":"https://hechamano.es/#contacto"
+        }
     </script>
 
     <!-- ========================================================= -->
@@ -304,19 +322,25 @@
         }
 
         .hero{
-
             background:
-            linear-gradient(rgba(0,0,0,.62),rgba(0,0,0,.62)),
-            url('/instalacion-suelo-greco-gres-terraza/Instalacion_Suelo_Greco_Gres_terraza.webp');
-
+                linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),
+                url('/instalacion-suelo-greco-gres-terraza/header_1200x416.webp');
             background-size:cover;
             background-position:center;
             background-repeat:no-repeat;
-
-            min-height:90vh;
-
+            min-height:80vh;
             display:flex;
             align-items:center;
+            padding: clamp(2rem, 6vh, 4rem) 0;
+        }
+
+        @media (max-width: 767px){
+            .hero{
+                background-image:
+                    linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),
+                    url('/instalacion-suelo-greco-gres-terraza/header_800x277.jpg');
+                min-height:70vh;
+            }
         }
 
         .hero h1{
@@ -414,6 +438,7 @@
             position:fixed;
             inset:0;
             background:rgba(0,0,0,.92);
+            display:flex;
             justify-content:center;
             align-items:center;
             z-index:99999;
@@ -593,211 +618,137 @@
 <!-- ========================================================= -->
 
 <header class="bg-white shadow-md sticky top-0 z-50">
-
     <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-
         <div class="flex items-center">
-
-            <a href="https://hechamano.es/"
-               class="site-logo-link flex items-center">
-
+            <a href="https://hechamano.es/" class="site-logo-link flex items-center">
                 <img
-                        src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/logo.webp"
-                        alt="Grupo HECHO A MANO"
-                        width="900"
-                        height="126"
-                        class="h-10 w-auto"
-                        loading="eager"
-                        decoding="async">
-
+                    src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/logo.webp"
+                    alt="Grupo HECHO A MANO"
+                    class="h-10 w-auto"
+                    width="900"
+                    height="126"
+                    loading="eager"
+                    decoding="async">
             </a>
-
         </div>
 
-        <!-- ========================================== -->
-        <!-- MENÚ ESCRITORIO -->
-        <!-- ========================================== -->
-
-        <nav class="hidden lg:flex desktop-nav"
-             aria-label="Navegación principal">
-
-            <a href="/"
-               class="nav-link home-link"
-               aria-label="Inicio">
-
-                <i class="fas fa-home" aria-hidden="true"></i>
-
+        <!-- Navegación en escritorio -->
+        <nav class="hidden lg:flex desktop-nav">
+            <a href="https://hechamano.es/" class="nav-link home-link" aria-label="Inicio" title="Inicio">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                    <path d="M3 10.5 12 3l9 7.5"></path>
+                    <path d="M5 10v10h14V10"></path>
+                    <path d="M9 20v-6h6v6"></path>
+                </svg>
+                <span class="sr-only">Inicio</span>
             </a>
-
-            <a href="#proyecto"
-               class="nav-link font-medium">
-                Proyecto
-            </a>
-
-            <a href="#proceso"
-               class="nav-link font-medium">
-                Proceso
-            </a>
-
-            <a href="#area-servicio"
-               class="nav-link font-medium">
-                Zona de servicio
-            </a>
-
-            <a href="#galeria"
-               class="nav-link font-medium">
-                Galería
-            </a>
-
-            <a href="#faq"
-               class="nav-link font-medium">
-                FAQ
-            </a>
-
-            <a href="#contacto"
-               class="nav-link font-medium">
-                Contacto
-            </a>
-
+            <a href="https://hechamano.es/#servicios" class="nav-link font-medium">Servicios</a>
             <div class="work-menu">
-
-                <a href="#trabajos"
-                   class="nav-link font-medium inline-flex items-center gap-1">
-
+                <a href="https://hechamano.es/#trabajos" class="nav-link font-medium inline-flex items-center gap-1">
                     Nuestro trabajo
-
                     <i class="fas fa-chevron-down text-xs" aria-hidden="true"></i>
-
                 </a>
-
-                <div class="work-submenu"
-                     role="group"
-                     aria-label="Trabajos realizados">
-
-                    <a href="https://hechamano.es/instalacion-suelo-greco-gres-terraza/">
-
-                        Instalación de Suelo Greco Gres para terrazas
-
-                    </a>
-
-                    <a href="https://hechamano.es/suelo-porcelanico-imitacion-hidraulico-lloret-de-mar/22885/">
-
-                        Suelo porcelánico imitación hidráulico
-
-                    </a>
-
-                    <a href="https://hechamano.es/reforma-cocina-platja-daro-encimera-porcelanica/22829/">
-
-                        Reforma de cocina con encimera porcelánica
-
-                    </a>
-
-                    <a href="https://hechamano.es/instalacion-suelo-porcelanico-tossa-de-mar-lloret-blanes/16912/">
-
-                        Suelo porcelánico imitación madera
-
-                    </a>
-
-                    <a href="https://hechamano.es/reformas-lavabo-en-lloret-de-mar/">
-
-                        Reformas de baños
-
-                    </a>
-
+                <div class="work-submenu" aria-label="Trabajos realizados">
+                    <a href="https://hechamano.es/instalacion-suelo-greco-gres-terraza/">Instalación de Suelo Greco Gres para terrazas</a>
+                    <a href="https://hechamano.es/suelo-porcelanico-imitacion-hidraulico-lloret-de-mar/22885/">Suelo Porcelánico imitación Hidráulico</a>
+                    <a href="https://hechamano.es/barandas-hierro-pintado-vidrio-mate-lloret-de-mar/22864/">Barandas de Hierro Pintado con Oxirón Blanco y Vidrio Mate 3+3</a>
+                    <a href="https://hechamano.es/armarios-aluminio-medida-girona-cubrir-compresor-aire-acondicionado/22858/">Armario de Aluminio Gris Texturado para cubrir Compresor de Aire Acondicionado</a>
+                    <a href="https://hechamano.es/reforma-cocina-platja-daro-encimera-porcelanica/22829/">Reforma de cocina con encimera porcelánica</a>
+                    <a href="https://hechamano.es/instalacion-de-cuadros-electricos-para-particulares-y-comunidades/22770/">Acometidas eléctricas &amp; Cuadros eléctricos</a>
+                    <a href="https://hechamano.es/instalacion-ventana-corredera-rpt-persiana-monoblok/20813/">Ventana corredera con RPT y persiana monoblok</a>
+                    <a href="https://hechamano.es/instalacion-ventanas-aluminio/20801/">Ventana aluminio practicable oscilobatiente rotura puente térmico dos hojas color azul</a>
+                    <a href="https://hechamano.es/manipulacion-vidrio-grua-precision-seguridad-lloret-de-mar/19945/">Manipulación de Vidrio con Grúa con Precisión y Seguridad en Acción</a>
+                    <a href="https://hechamano.es/armario-cama-sofa-arcon-multifuncional/19934/">Armario a Medida Convertible en Cama y Sofá con Arcón</a>
+                    <a href="https://hechamano.es/mampara-de-3-hojas-correderas-con-vidrios-antical/16858/">Mamparas</a>
+                    <a href="https://hechamano.es/invernadero-en-lloret-de-mar/">Invernadero</a>
+                    <a href="https://hechamano.es/reformas-lavabo-en-lloret-de-mar/">Reformas Lavabo</a>
+                    <a href="https://hechamano.es/rehabilitacion-del-faro-de-tossa-de-mar/16700/">Rehabilitación del faro</a>
+                    <a href="https://hechamano.es/fotos-carpinteria-aluminio-cataluna/5226/">Carpintería de aluminio</a>
+                    <a href="https://hechamano.es/instalacion-de-barandas-de-vidrio-10x10-transparente-en-arenys-de-mar/">Instalación de barandas de vidrio 10+10 transparente</a>
+                    <a href="https://hechamano.es/construccion-de-piscina-con-la-cubierta-de-cerramiento-de-aluminio-lloret/16777/">Construcción de piscina con la cubierta de cerramiento de aluminio</a>
+                    <a href="https://hechamano.es/puertas-de-vidrio-templado/">Puertas de vidrio templado</a>
+                    <a href="https://hechamano.es/reforma-de-lavabo-wcbano-en-lloret-de-mar/">Reforma de lavabo (WC/baño)</a>
+                    <a href="https://hechamano.es/barandas-de-acero-inoxidable/">Barandas de acero inoxidable</a>
+                    <a href="https://hechamano.es/reforma-claraboya-con-vidrio-de-colores/">Reformas claraboya con vidrio de colores</a>
+                    <a href="https://hechamano.es/cambio-de-banera-por-plato-de-ducha-en-lloret-de-mar/17087/">Cambio de bañera por plato de ducha</a>
+                    <a href="https://hechamano.es/fabricacion-de-armario-de-aluminio-en-lloret-de-mar/16829/">Fabricación de armario de aluminio</a>
+                    <a href="https://hechamano.es/instalacion-de-plataforma-de-acceso-a-la-baliza-en-el-puerto-de-roses/16684/">Instalación de plataforma de acceso a la baliza en el puerto de Roses</a>
+                    <a href="https://hechamano.es/fotos-de-trabajos-de-construccion-paleteria-y-reformas-integrales/3984/">Construcción y reformas integrales</a>
+                    <a href="https://hechamano.es/carpinteria-de-madera-proyecto-imagen-comercial-e-interiorismo/">Carpintería de madera - Proyecto de imagen comercial e interiorismo</a>
+                    <a href="https://hechamano.es/carpinteria-de-madera-espacio-moderno-inspirado-interiores-clasicos/">Carpintería de madera</a>
+                    <a href="https://hechamano.es/alfombra-de-baldosas-hidraulicas-playa-de-aro/5062/">Alfombra de baldosas hidráulicas</a>
+                    <a href="https://hechamano.es/instalacion-suelo-porcelanico-tossa-de-mar-lloret-blanes/16912/">Suelo porcelánico imitación madera</a>
                 </div>
-
             </div>
-
+            <a href="https://hechamano.es/#test" class="nav-link font-medium">Qué reforma necesitas?</a>
+            <a href="https://hechamano.es/#galeria" class="nav-link font-medium">Galería</a>
+            <a href="https://hechamano.es/#opiniones" class="nav-link font-medium">Opiniones</a>
+            <a href="https://hechamano.es/#faq" class="nav-link font-medium">FAQ</a>
+            <a href="https://hechamano.es/#contacto" class="nav-link font-medium">Contacto</a>
         </nav>
 
-        <!-- ========================================== -->
-        <!-- BOTÓN MÓVIL -->
-        <!-- ========================================== -->
-
+        <!-- Botón de menú móvil -->
         <button id="mobile-menu-button"
-                type="button"
-                class="lg:hidden text-gray-700"
+                class="lg:hidden text-gray-700 focus:outline-none"
                 aria-controls="mobile-menu"
                 aria-expanded="false"
                 aria-label="Abrir menú de navegación">
-
             <i class="fas fa-bars text-2xl" aria-hidden="true"></i>
-
         </button>
-
     </div>
 
-    <!-- ========================================== -->
-    <!-- MENÚ MÓVIL -->
-    <!-- ========================================== -->
-
-    <nav id="mobile-menu"
-         class="mobile-menu hidden lg:hidden bg-white"
-         aria-label="Navegación móvil">
-
+    <!-- Navegación móvil -->
+    <nav id="mobile-menu" class="mobile-menu lg:hidden bg-white hidden" aria-label="Menú principal">
         <div class="px-4 py-2 space-y-3">
-
-            <a href="#proyecto">Proyecto</a>
-
-            <a href="#proceso">Proceso</a>
-
-            <a href="#area-servicio">Zona de servicio</a>
-
-            <a href="#galeria">Galería</a>
-
-            <a href="#faq">FAQ</a>
-
-            <a href="#contacto">Contacto</a>
-
+            <a href="https://hechamano.es/" class="block py-2 font-medium">Inicio</a>
+            <a href="https://hechamano.es/#servicios" class="block py-2 font-medium">Servicios</a>
             <details>
-
-                <summary>
-
+                <summary class="flex cursor-pointer list-none items-center justify-between py-2 font-medium">
                     Nuestro trabajo
-
+                    <i class="fas fa-chevron-down text-xs" aria-hidden="true"></i>
                 </summary>
-
                 <div class="mobile-work-submenu">
-
-                    <a href="https://hechamano.es/instalacion-suelo-greco-gres-terraza/">
-
-                        Instalación de Suelo Greco Gres para terrazas
-
-                    </a>
-
-                    <a href="https://hechamano.es/suelo-porcelanico-imitacion-hidraulico-lloret-de-mar/22885/">
-
-                        Suelo porcelánico imitación hidráulico
-
-                    </a>
-
-                    <a href="https://hechamano.es/reforma-cocina-platja-daro-encimera-porcelanica/22829/">
-
-                        Reforma de cocina con encimera porcelánica
-
-                    </a>
-
-                    <a href="https://hechamano.es/instalacion-suelo-porcelanico-tossa-de-mar-lloret-blanes/16912/">
-
-                        Suelo porcelánico imitación madera
-
-                    </a>
-
-                    <a href="https://hechamano.es/reformas-lavabo-en-lloret-de-mar/">
-
-                        Reformas de baños
-
-                    </a>
-
+                    <a href="https://hechamano.es/instalacion-suelo-greco-gres-terraza/">Instalación de Suelo Greco Gres para terrazas</a>
+                    <a href="https://hechamano.es/suelo-porcelanico-imitacion-hidraulico-lloret-de-mar/22885/">Suelo Porcelánico imitación Hidráulico</a>
+                    <a href="https://hechamano.es/barandas-hierro-pintado-vidrio-mate-lloret-de-mar/22864/">Barandas de Hierro Pintado con Oxirón Blanco y Vidrio Mate 3+3</a>
+                    <a href="https://hechamano.es/armarios-aluminio-medida-girona-cubrir-compresor-aire-acondicionado/22858/">Armario de Aluminio Gris Texturado para cubrir Compresor de Aire Acondicionado</a>
+                    <a href="https://hechamano.es/reforma-cocina-platja-daro-encimera-porcelanica/22829/">Reforma de cocina con encimera porcelánica</a>
+                    <a href="https://hechamano.es/instalacion-de-cuadros-electricos-para-particulares-y-comunidades/22770/">Acometidas eléctricas &amp; Cuadros eléctricos</a>
+                    <a href="https://hechamano.es/instalacion-ventana-corredera-rpt-persiana-monoblok/20813/">Ventana corredera con RPT y persiana monoblok</a>
+                    <a href="https://hechamano.es/instalacion-ventanas-aluminio/20801/">Ventana aluminio practicable oscilobatiente rotura puente térmico dos hojas color azul</a>
+                    <a href="https://hechamano.es/manipulacion-vidrio-grua-precision-seguridad-lloret-de-mar/19945/">Manipulación de Vidrio con Grúa con Precisión y Seguridad en Acción</a>
+                    <a href="https://hechamano.es/armario-cama-sofa-arcon-multifuncional/19934/">Armario a Medida Convertible en Cama y Sofá con Arcón</a>
+                    <a href="https://hechamano.es/mampara-de-3-hojas-correderas-con-vidrios-antical/16858/">Mamparas</a>
+                    <a href="https://hechamano.es/invernadero-en-lloret-de-mar/">Invernadero</a>
+                    <a href="https://hechamano.es/reformas-lavabo-en-lloret-de-mar/">Reformas Lavabo</a>
+                    <a href="https://hechamano.es/rehabilitacion-del-faro-de-tossa-de-mar/16700/">Rehabilitación del faro</a>
+                    <a href="https://hechamano.es/fotos-carpinteria-aluminio-cataluna/5226/">Carpintería de aluminio</a>
+                    <a href="https://hechamano.es/instalacion-de-barandas-de-vidrio-10x10-transparente-en-arenys-de-mar/">Instalación de barandas de vidrio 10+10 transparente</a>
+                    <a href="https://hechamano.es/construccion-de-piscina-con-la-cubierta-de-cerramiento-de-aluminio-lloret/16777/">Construcción de piscina con la cubierta de cerramiento de aluminio</a>
+                    <a href="https://hechamano.es/puertas-de-vidrio-templado/">Puertas de vidrio templado</a>
+                    <a href="https://hechamano.es/reforma-de-lavabo-wcbano-en-lloret-de-mar/">Reforma de lavabo (WC/baño)</a>
+                    <a href="https://hechamano.es/barandas-de-acero-inoxidable/">Barandas de acero inoxidable</a>
+                    <a href="https://hechamano.es/reforma-claraboya-con-vidrio-de-colores/">Reformas claraboya con vidrio de colores</a>
+                    <a href="https://hechamano.es/cambio-de-banera-por-plato-de-ducha-en-lloret-de-mar/17087/">Cambio de bañera por plato de ducha</a>
+                    <a href="https://hechamano.es/fabricacion-de-armario-de-aluminio-en-lloret-de-mar/16829/">Fabricación de armario de aluminio</a>
+                    <a href="https://hechamano.es/instalacion-de-plataforma-de-acceso-a-la-baliza-en-el-puerto-de-roses/16684/">Instalación de plataforma de acceso a la baliza en el puerto de Roses</a>
+                    <a href="https://hechamano.es/fotos-de-trabajos-de-construccion-paleteria-y-reformas-integrales/3984/">Construcción y reformas integrales</a>
+                    <a href="https://hechamano.es/carpinteria-de-madera-proyecto-imagen-comercial-e-interiorismo/">Carpintería de madera - Proyecto de imagen comercial e interiorismo</a>
+                    <a href="https://hechamano.es/carpinteria-de-madera-espacio-moderno-inspirado-interiores-clasicos/">Carpintería de madera</a>
+                    <a href="https://hechamano.es/alfombra-de-baldosas-hidraulicas-playa-de-aro/5062/">Alfombra de baldosas hidráulicas</a>
+                    <a href="https://hechamano.es/instalacion-suelo-porcelanico-tossa-de-mar-lloret-blanes/16912/">Suelo porcelánico imitación madera</a>
                 </div>
-
             </details>
-
+            <a href="https://hechamano.es/#test" class="block py-2 font-medium">Qué reforma necesitas?</a>
+            <a href="https://hechamano.es/#galeria" class="block py-2 font-medium">Galería</a>
+            <a href="https://hechamano.es/#opiniones" class="block py-2 font-medium">Opiniones</a>
+            <a href="https://hechamano.es/#faq" class="block py-2 font-medium">FAQ</a>
+            <a href="https://hechamano.es/#contacto" class="block py-2 font-medium">Contacto</a>
         </div>
-
     </nav>
-
 </header>
+
 
 <main id="contenido">
 
@@ -1783,6 +1734,18 @@
 
             </h2>
 
+            <figure class="my-10">
+
+                <img src="/instalacion-suelo-greco-gres-terraza/suelo_greco_gres_terraza_lloret_antes_y_despues.webp"
+                     alt="Antes y después de la instalación de suelo Greco Gres en una terraza en Lloret de Mar"
+                     width="1200"
+                     height="600"
+                     loading="lazy"
+                     decoding="async"
+                     class="w-full h-auto rounded-xl shadow-lg">
+
+            </figure>
+
             <p class="text-lg leading-8">
 
                 La diferencia no se aprecia únicamente desde el punto de vista
@@ -2241,34 +2204,35 @@
 
         </div>
 
-        <div class="grid md:grid-cols-3 gap-8 mt-16">
+        <div class="grid md:grid-cols-2 gap-8 mt-16 max-w-5xl mx-auto">
 
-            <img
-                src="/instalacion-suelo-greco-gres-terraza/foto_destacada_Instalacion_de_Suelo_Greco_Gres_para_terraza.webp"
-                alt="Vista general del suelo Greco Gres instalado en una terraza de Lloret de Mar"
-                width="1200"
-                height="630"
-                class="gallery-item rounded-xl shadow-lg w-full"
-                loading="lazy"
-                decoding="async">
+            <figure class="gallery-item rounded-xl shadow-lg overflow-hidden bg-white">
+                <img
+                    src="/instalacion-suelo-greco-gres-terraza/fases_instalacion_suelo_Greco_gres_terraza.webp"
+                    alt="Fases del proceso de instalación de suelo Greco Gres en la terraza"
+                    width="1200"
+                    height="800"
+                    class="w-full h-auto"
+                    loading="lazy"
+                    decoding="async">
+                <figcaption class="p-4 text-center text-gray-700 font-medium">
+                    Fases del proceso paso a paso
+                </figcaption>
+            </figure>
 
-            <img
-                src="/instalacion-suelo-greco-gres-terraza/fases_instalacion_suelo_Greco_gres_terraza.webp"
-                alt="Fases de instalación del suelo Greco Gres en la terraza"
-                width="1200"
-                height="800"
-                class="gallery-item rounded-xl shadow-lg w-full"
-                loading="lazy"
-                decoding="async">
-
-            <img
-                src="/instalacion-suelo-greco-gres-terraza/Instalacion_Suelo_Greco_Gres_terraza.webp"
-                alt="Resultado final de la terraza con pavimento Greco Gres"
-                width="1200"
-                height="800"
-                class="gallery-item rounded-xl shadow-lg w-full"
-                loading="lazy"
-                decoding="async">
+            <figure class="gallery-item rounded-xl shadow-lg overflow-hidden bg-white">
+                <img
+                    src="/instalacion-suelo-greco-gres-terraza/Instalacion_Suelo_Greco_Gres_terraza.webp"
+                    alt="Resultado final: terraza con pavimento Greco Gres instalado"
+                    width="1200"
+                    height="630"
+                    class="w-full h-auto"
+                    loading="lazy"
+                    decoding="async">
+                <figcaption class="p-4 text-center text-gray-700 font-medium">
+                    Resultado final
+                </figcaption>
+            </figure>
 
         </div>
 
@@ -2318,7 +2282,12 @@
 
                     <h3 class="text-2xl font-bold mb-4">
 
-                        Suelo porcelánico imitación hidráulico
+                        <a href="https://hechamano.es/suelo-porcelanico-imitacion-hidraulico-lloret-de-mar/22885/"
+                           class="text-blue-600 font-bold">
+
+                            Suelo porcelánico imitación hidráulico
+
+                        </a>
 
                     </h3>
 
@@ -2328,13 +2297,6 @@
                         por nuestro equipo en una vivienda de la Costa Brava.
 
                     </p>
-
-                    <a href="https://hechamano.es/suelo-porcelanico-imitacion-hidraulico-lloret-de-mar/22885/"
-                       class="text-orange-600 font-bold">
-
-                        Leer proyecto →
-
-                    </a>
 
                 </div>
 
@@ -2355,7 +2317,12 @@
 
                     <h3 class="text-2xl font-bold mb-4">
 
-                        Reforma integral de cocina
+                        <a href="https://hechamano.es/reforma-cocina-platja-daro-encimera-porcelanica/22829/"
+                           class="text-blue-600 font-bold">
+
+                            Reforma integral de cocina
+
+                        </a>
 
                     </h3>
 
@@ -2365,13 +2332,6 @@
                         y acabados modernos.
 
                     </p>
-
-                    <a href="https://hechamano.es/reforma-cocina-platja-daro-encimera-porcelanica/22829/"
-                       class="text-orange-600 font-bold">
-
-                        Leer proyecto →
-
-                    </a>
 
                 </div>
 
@@ -2392,7 +2352,12 @@
 
                     <h3 class="text-2xl font-bold mb-4">
 
-                        Reforma completa de baño
+                        <a href="https://hechamano.es/reformas-lavabo-en-lloret-de-mar/"
+                           class="text-blue-600 font-bold">
+
+                            Reforma completa de baño
+
+                        </a>
 
                     </h3>
 
@@ -2402,13 +2367,6 @@
                         sanitarios.
 
                     </p>
-
-                    <a href="https://hechamano.es/reformas-lavabo-en-lloret-de-mar/"
-                       class="text-orange-600 font-bold">
-
-                        Leer proyecto →
-
-                    </a>
 
                 </div>
 
@@ -2550,55 +2508,50 @@
 <!-- CTA -->
 <!-- ========================================================= -->
 
-<section id="contacto"
-         class="py-24 bg-orange-600 text-white">
-
+<section id="contacto" class="py-20 bg-orange-600 text-white">
     <div class="container mx-auto px-4">
-
-        <div class="max-w-4xl mx-auto text-center">
-
-            <h2 class="text-5xl font-bold mb-8">
-
-                ¿Quieres renovar tu terraza?
-
-            </h2>
-
-            <p class="text-xl leading-9 mb-12">
-
-                Si estás pensando en instalar un nuevo pavimento para tu
-                terraza, patio o zona exterior en Lloret de Mar, la Costa Brava,
-                la Selva o poblaciones próximas del Maresme, estaremos
-                encantados de asesorarte y preparar un presupuesto personalizado
-                y sin compromiso.
-
+        <div class="text-center max-w-3xl mx-auto mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">¿Quieres renovar tu terraza?</h2>
+            <p class="text-lg md:text-xl leading-8 opacity-95">
+                Si estás pensando en instalar un nuevo pavimento Greco Gres en tu terraza, patio o zona exterior en
+                Lloret de Mar, la Costa Brava, la Selva o el Maresme, te asesoramos sin compromiso y preparamos un
+                presupuesto personalizado.
             </p>
-
-            <div class="flex flex-wrap justify-center gap-5">
-
-                <a href="tel:+34620530454"
-                   class="bg-white text-orange-600 font-bold px-8 py-4 rounded-full">
-
-                    <i class="fas fa-phone-alt mr-2" aria-hidden="true"></i>
-
-                    620&nbsp;53&nbsp;04&nbsp;54
-
-                </a>
-
-                <a href="https://wa.me/34620530454"
-                   class="bg-green-500 text-white font-bold px-8 py-4 rounded-full">
-
-                    <i class="fab fa-whatsapp mr-2" aria-hidden="true"></i>
-
-                    WhatsApp
-
-                </a>
-
-            </div>
-
         </div>
 
-    </div>
+        <div class="max-w-2xl mx-auto">
+            <div class="bg-white text-gray-800 rounded-lg shadow-md p-8">
+                <div class="text-center space-y-6">
+                    <div>
+                        <h3 class="text-xl font-bold mb-2">Correo</h3>
+                        <a href="mailto:info@hechamano.es" class="text-blue-600 hover:text-blue-800 text-lg">info@hechamano.es</a>
+                    </div>
 
+                    <div>
+                        <h3 class="text-xl font-bold mb-2">Teléfono</h3>
+                        <a href="tel:+34620530454" class="text-blue-600 hover:text-blue-800 text-lg">+34 620 53 04 54</a>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-bold mb-3">Oficina</h3>
+                        <a href="https://maps.app.goo.gl/8Ph3tuushFsRcB6r8" target="_blank" rel="noopener"
+                           class="inline-flex items-center justify-center gap-3 rounded-lg border border-blue-100 bg-blue-50 px-5 py-4 text-blue-700 hover:border-blue-200 hover:bg-blue-100 hover:text-blue-900 transition">
+                            <i class="fas fa-map-marker-alt text-xl" aria-hidden="true"></i>
+                            <span class="text-lg">Av. Vila de Tossa, 54, 17310 Lloret de Mar</span>
+                        </a>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-bold mb-2">WhatsApp</h3>
+                        <a href="https://wa.me/34620530454" target="_blank"
+                           class="inline-block bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full transition-colors">
+                            <i class="fab fa-whatsapp text-xl mr-2"></i> Envíanos un WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 </main>
@@ -2607,118 +2560,83 @@
 <!-- FOOTER -->
 <!-- ========================================================= -->
 
-<footer class="bg-gray-900 text-white py-16">
-
+<footer class="bg-gray-900 text-white py-12">
     <div class="container mx-auto px-4">
-
-        <div class="grid lg:grid-cols-4 gap-10">
-
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <!-- Nuestra ubicación -->
             <div>
-
-                <img
-                    src="/empresa_de_reformas_integrales_en_lloret_de_mar/img/logo.webp"
-                    alt="Grupo HECHO A MANO"
-                    width="900"
-                    height="126"
-                    class="h-12 w-auto mb-6"
-                    loading="lazy"
-                    decoding="async">
-
-                <p class="leading-8 text-gray-300">
-
-                    Empresa especializada en reformas integrales, baños,
-                    cocinas, terrazas y pavimentos porcelánicos. Este caso
-                    corresponde a Lloret de Mar y trabajamos también en la
-                    Costa Brava, la Selva y poblaciones próximas del Maresme.
-
+                <h3 class="text-xl font-bold mb-4">Estamos en</h3>
+                <p class="text-gray-300">
+                    <a href="https://maps.app.goo.gl/8Ph3tuushFsRcB6r8" target="_blank" rel="noopener" class="hover:text-white">
+                        Av. Vila de Tossa, 54, 17310 Lloret de Mar
+                    </a>
                 </p>
-
             </div>
 
+            <!-- Enlaces de servicio -->
             <div>
-
-                <h3 class="font-bold text-xl mb-6">
-
-                    Servicios
-
-                </h3>
-
-                <ul class="space-y-3 text-gray-300">
-
-                    <li>Reformas integrales</li>
-
-                    <li>Reformas de baños</li>
-
-                    <li>Reformas de cocinas</li>
-
-                    <li>Terrazas</li>
-
-                    <li>Pavimentos porcelánicos</li>
-
+                <h3 class="text-xl font-bold mb-4">Servicios y zonas</h3>
+                <ul class="space-y-2 text-sm text-gray-300">
+                    <li><a href="https://hechamano.es/reformas_integrales_vidreres/" class="hover:text-white">Reformas Vidreres</a></li>
+                    <li><a href="https://hechamano.es/reformas-calella/" class="hover:text-white">Reformas Calella</a></li>
+                    <li><a href="https://hechamano.es/reformas_playa_de_aro/" class="hover:text-white">Reformas Platja d'Aro</a></li>
+                    <li><a href="https://reformas-integrales-blanes.es/" class="hover:text-white">Reformas integrales en Blanes</a></li>
+                    <li><a href="https://hechamano.es/carpinteria-de-aluminio-en-maresme-y-la-selva-informacion-de-los-vidrios/4986/" class="hover:text-white">Vidrios y ventanas minimalistas</a></li>
                 </ul>
-
             </div>
 
+            <!-- Síguenos aquí -->
             <div>
-
-                <h3 class="font-bold text-xl mb-6">
-
-                    Contacto
-
-                </h3>
-
-                <ul class="space-y-3 text-gray-300">
-
-                    <li><a href="tel:+34620530454">620&nbsp;53&nbsp;04&nbsp;54</a></li>
-
-                    <li>Lloret de Mar (Girona)</li>
-
-                    <li>Costa Brava</li>
-
-                    <li>La Selva y Maresme</li>
-
-                </ul>
-
-            </div>
-
-            <div>
-
-                <h3 class="font-bold text-xl mb-6">
-
-                    Síguenos
-
-                </h3>
-
-                <div class="flex gap-5 text-2xl">
-
-                    <a href="https://www.facebook.com/hechamano.es"
-                       aria-label="Facebook de Grupo HECHO A MANO">
-                        <i class="fab fa-facebook" aria-hidden="true"></i>
+                <h3 class="text-xl font-bold mb-4">Síguenos en redes y descubre nuestros últimos proyectos de reforma</h3>
+                <div class="flex space-x-4">
+                    <a href="https://www.facebook.com/hechamano.es" rel="nofollow noopener noreferrer" target="_blank"
+                       class="text-gray-300 hover:text-white transition-colors">
+                        <i class="fab fa-facebook text-2xl"></i>
                     </a>
-
-                    <a href="https://www.instagram.com/hechamano.es/"
-                       aria-label="Instagram de Grupo HECHO A MANO">
-                        <i class="fab fa-instagram" aria-hidden="true"></i>
+                    <a href="https://x.com/hechamanoes" rel="nofollow noopener noreferrer" target="_blank"
+                       class="text-gray-300 hover:text-white transition-colors">
+                        <i class="fab fa-twitter text-2xl"></i>
                     </a>
-
-                    <a href="https://www.youtube.com/@laredgrupohechoamano-refor6156"
-                       aria-label="YouTube de Grupo HECHO A MANO">
-                        <i class="fab fa-youtube" aria-hidden="true"></i>
+                    <a href="https://www.youtube.com/@laredgrupohechoamano-refor6156" rel="nofollow noopener noreferrer"
+                       target="_blank" class="text-gray-300 hover:text-white transition-colors">
+                        <i class="fab fa-youtube text-2xl"></i>
                     </a>
-
-                    <a href="https://x.com/hechamanoes"
-                       aria-label="X de Grupo HECHO A MANO">
-                        <i class="fab fa-x-twitter" aria-hidden="true"></i>
+                    <a href="https://www.instagram.com/hechamano.es/" rel="nofollow noopener noreferrer" target="_blank"
+                       class="text-gray-300 hover:text-white transition-colors">
+                        <i class="fab fa-instagram text-2xl"></i>
                     </a>
-
                 </div>
-
             </div>
 
+            <!-- Aviso Legal y Política de Privacidad -->
+            <div>
+                <h3 class="text-xl font-bold mb-4">Información legal</h3>
+                <p class="text-gray-300 text-sm">
+                    Esta página se ha creado sobre una estructura HTML estática. Informamos de que no se recopilan datos personales ni se emplean cookies analíticas, publicitarias o de seguimiento. El contenido disponible tiene carácter exclusivamente informativo y no está conectado a bases de datos ni a plataformas de gestión de contenidos (CMS).<br><br>
+                    <a href="https://hechamano.es/" rel="noopener noreferrer"
+                       class="text-white hover:text-blue-400">Reformas Hecho a Mano</a>, S.L.U.<br>
+                    CIF: B56416514
+                </p>
+                <br>
+                <p class="text-gray-300 text-sm">
+                    Diseño, desarrollo y posicionamiento realizados por
+                    <a href="https://www.linkedin.com/in/sergio-davidiants-misailidi/?utm_source=client_site&utm_medium=footer&utm_campaign=credits"
+                       target="_blank" rel="noopener noreferrer"
+                       class="underline hover:text-blue-400"
+                       aria-label="Visitar el perfil de Sergio Davidiants Misailidi en LinkedIn">
+                        Sergio Davidiants Misailidi · Especialista en SEO Local
+                    </a>
+                    <span class="mx-2 text-gray-500">|</span>
+                    <a href="https://wa.me/34663283750?text=Hola%20Sergio.%20Me%20interesa%20un%20presupuesto%20de%20posicionamiento%20web%20org%C3%A1nico,%20SEO%20local%20%26%20GEO%20para%20mi%20empresa.%0ACiudad:%20%5BCiudad%5D%20%28%E2%89%A450.000%20hab.%29.%0ASector:%20%5BSector%5D.%0AWeb:%20%5BURL%5D.%0A%C2%BFPodemos%20agendar%20una%20llamada%20esta%20semana%3F%0A%0ALa%20forma%20en%20que%20la%20gente%20busca%20informaci%C3%B3n%20est%C3%A1%20cambiando,%20y%20la%20inteligencia%20artificial%20%28IA%29%20juega%20un%20papel%20clave.%20Ya%20no%20se%20trata%20solo%20de%20aparecer%20en%20los%20primeros%20puestos%20de%20Google,%20sino%20de%20ser%20la%20fuente%20que%20la%20IA%20utiliza%20para%20generar%20sus%20respuestas.%20A%20esto%20se%20le%20llama%20Generative%20Engine%20Optimization%20%28GEO%29."
+                       target="_blank" rel="noopener nofollow"
+                       class="hover:text-green-400"
+                       aria-label="Contactar por WhatsApp con Sergio Davidiants">
+                        Contactar por <i class="fab fa-whatsapp text-xl align-middle" aria-hidden="true"></i><span class="sr-only">WhatsApp</span>
+                    </a>
+                </p>
+            </div>
         </div>
-
     </div>
-
 </footer>
 
 <!-- ========================================================= -->
@@ -2832,7 +2750,8 @@ document.addEventListener("DOMContentLoaded",function(){
 
     }
 
-    const images=Array.from(document.querySelectorAll(".gallery-item"));
+
+    const images = Array.from(document.querySelectorAll(".gallery-item img, img.gallery-item"));
     const modal=document.getElementById("imageModal");
     const modalImage=document.getElementById("modalImage");
     const close=document.querySelector(".close");
